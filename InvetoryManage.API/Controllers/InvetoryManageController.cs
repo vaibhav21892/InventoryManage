@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using InvetoryManage.API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InvetoryManage.API.Controllers
 {
 #pragma warning disable CS1591
     [ApiController]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class InventoryController : ControllerBase
     {
@@ -41,6 +43,7 @@ namespace InvetoryManage.API.Controllers
         [HttpGet("StockItem")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
+        
         public async Task<IActionResult> GetStockItemsAsync(int pageSize = 10, int pageNumber = 1, int? lastEditedBy = null, int? colorID = null, int? outerPackageID = null, int? supplierID = null, int? unitPackageID = null)
         {
             Logger?.LogDebug("'{0}' has been invoked", nameof(GetStockItemsAsync));
